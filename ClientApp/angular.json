@@ -1,9 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "9cea997f-10bd-4bda-b0ae-01fbe9396f55"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "AlertsApp": {
+    "DBCon.Ui": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -37,8 +40,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "4mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -69,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "AlertsApp:build:production"
+              "browserTarget": "DBCon.Ui:build:production"
             },
             "development": {
-              "browserTarget": "AlertsApp:build:development",
+              "browserTarget": "DBCon.Ui:build:development",
               "proxyConfig": "proxy.conf.js"
             }
           },
@@ -81,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AlertsApp:build"
+            "browserTarget": "DBCon.Ui:build"
           }
         },
         "test": {
@@ -129,5 +132,5 @@
       }
     }
   },
-  "defaultProject": "AlertsApp"
+  "defaultProject": "DBCon.Ui"
 }

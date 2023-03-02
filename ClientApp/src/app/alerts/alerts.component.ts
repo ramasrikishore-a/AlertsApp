@@ -6,16 +6,16 @@ import { CellClickedEvent, ColDef, GridReadyEvent } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-alerts',
+  templateUrl: './alerts.component.html',
+  styleUrls: ['./alerts.component.css']
 })
-export class HomeComponent implements OnInit {
+export class AlertsComponent implements OnInit {
 
   private hserice: HeroService;
   public data: any = [{}];
   public sources: any;
-  public selectedSource: any="";
+  public selectedSource: any = "";
   public base_url: any;
   public resultCount: any = 0;
   public rowData$!: Observable<any[]>;
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     accountEndPoint: "AccountEndpoint=https://kishoredb.documents.azure.com:443/;AccountKey=ZDn6rp3P54gyZBdHrMpmkEsjv6HKfw4zCOcU2upXy5FgbcWvK0bcUAYzn1K0PpPNNJDfoCtVdOtsACDbIK0c6w==;",
     querystring: "SELECT * FROM employees e where e.salary > 90000",
     database: "SampleDB",
-    container:"Employee"
+    container: "Employee"
   }
 
   columnDefs: ColDef[] = [
@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  onGridReady(event:any) {
+  onGridReady(event: any) {
     //this.rowData$ = this.hserice.submitQuery(this.sqlRequest, this.base_url);
 
   }
@@ -113,7 +113,7 @@ export class HomeComponent implements OnInit {
           this.data = [];
           this.resultCount = 0;
         }
-      
+
       }
       this.loading = false;
 
