@@ -21,6 +21,12 @@ export class AlertsComponent implements OnInit {
   public rowData$!: Observable<any[]>;
   public loading: any = false;
   public statusMessage: any = "";
+  public alertName = "";
+  public threshold = "";
+  public freqofeval = "";
+  public condition = "";
+  public actiongroup = "";
+
 
   constructor(heroService: HeroService, @Inject('BASE_URL') baseUrl: string) {
     this.hserice = heroService;
@@ -125,4 +131,17 @@ export class AlertsComponent implements OnInit {
       });
   }
 
+  savealert() {
+    var alertSaveObject = {
+      "Name": this.alertName,
+      "FrequencyofEvaluation": this.freqofeval,
+      "condition": this.condition,
+      "actiongroup": this.actiongroup,
+      "source": this.selectedSource,
+      "request": this.selectedSource == 'sql' ? JSON.stringify(this.sqlRequest) : JSON.stringify(this.cosmosRequest),
+      "user":"kishore"
+    }
+
+
+  }
 }

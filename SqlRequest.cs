@@ -17,4 +17,26 @@
 
         public string container { get; set; }
     }
+
+    public class Alert
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+
+        public string Condition { get; set; }
+
+        public string Request { get; set; }
+        public string FrequencyofEvaluation { get; set; }
+
+        public string Source { get; set; }
+
+        public string User { get; set; }
+
+        //public string Created { get; set; }
+
+        //public string Modified { get; set; }
+
+        //public string ModifiedBy { get; set; }
+        //public string CreatedBy { get; set; }
+    }
 }

@@ -36,6 +36,13 @@ namespace DBCon.Ui.Controllers
 
         }
 
+        [HttpPost("savealert")]
+        public string SaveAlert(Alert alert)
+        {
+
+            return "s";
+        }
+
         [HttpPost("ExecuteCosmosQ")]
         public  JsonResult ExecuteCosmosQ(CosmosRequest csRequest)
         {
