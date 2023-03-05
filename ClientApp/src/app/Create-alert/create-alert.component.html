@@ -86,39 +86,39 @@
   </div>
 </div>
 
-  <ng-template #sqlTemplate>
-    <div class="row">
-      <label for="name">Connection String: </label>
-      <input id="name" class="form-control" [(ngModel)]="sqlRequest.connectionString" placeholder="connectionString">
-    </div>
-    <div class="row">
-      <label for="name">Query: </label>
-      <input id="name" class="form-control" [(ngModel)]="sqlRequest.querystring" placeholder="query">
-    </div>
-    <div class="row">
-      <button class="btn btn-primary" (click)="onGet()"> Submit </button>
-    </div>
-  </ng-template>
+<ng-template #sqlTemplate>
+  <div class="row">
+    <label for="name">Connection String: </label>
+    <input id="name" class="form-control" [(ngModel)]="sqlRequest.connectionString" placeholder="connectionString">
+  </div>
+  <div class="row">
+    <label for="name">Query: </label>
+    <input id="name" class="form-control" [(ngModel)]="sqlRequest.querystring" placeholder="query">
+  </div>
+  <div class="row">
+    <button class="btn btn-primary" (click)="onGet()"> Submit </button>
+  </div>
+</ng-template>
 
-  <ng-template #cosmosTemplate>
-    Cosmos
-    <div class="row">
-      <label for="name">Account Endpoint: </label>
-      <input id="name" class="form-control" [(ngModel)]="cosmosRequest.accountEndPoint" placeholder="connectionString">
-    </div>
-    <div class="row">
-      <label for="name">Database: </label>
-      <input id="name" class="form-control" [(ngModel)]="cosmosRequest.database" placeholder="query">
-    </div>
-    <div class="row">
-      <label for="name">Container: </label>
-      <input id="name" class="form-control" [(ngModel)]="cosmosRequest.container" placeholder="query">
-    </div>
-    <div class="row">
-      <label for="name">Query: </label>
-      <input id="name" class="form-control" [(ngModel)]="cosmosRequest.querystring" placeholder="query">
-    </div>
-    <div class="row">
-      <button class="btn btn-primary" (click)="onCsSubmit()"> Submit </button>
-    </div>
-  </ng-template>
+<ng-template #cosmosTemplate>
+  Cosmos
+  <div class="row">
+    <label for="name">Account Endpoint: </label>
+    <input id="name" class="form-control" [(ngModel)]="cosmosRequest.accountEndPoint" placeholder="connectionString">
+  </div>
+  <div class="row">
+    <label for="name">Database: </label>
+    <input id="name" class="form-control" [(ngModel)]="cosmosRequest.database" placeholder="query">
+  </div>
+  <div class="row">
+    <label for="name">Container: </label>
+    <input id="name" class="form-control" [(ngModel)]="cosmosRequest.container" placeholder="query">
+  </div>
+  <div class="row">
+    <label for="name">Query: </label>
+    <input id="name" class="form-control" [(ngModel)]="cosmosRequest.querystring" placeholder="query">
+  </div>
+  <div class="row">
+    <button class="btn btn-primary" (click)="onCsSubmit()"> Submit </button>
+  </div>
+</ng-template>

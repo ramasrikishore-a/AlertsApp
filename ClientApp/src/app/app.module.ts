@@ -31,7 +31,7 @@ import { AgGridModule } from 'ag-grid-angular';
     
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
+      { path: 'counter', component: FetchDataComponent },
       { path: 'alerts', component: AlertsComponent },
     ])
   ],

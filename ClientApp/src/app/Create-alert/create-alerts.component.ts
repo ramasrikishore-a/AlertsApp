@@ -136,7 +136,7 @@ export class AlertsComponent implements OnInit {
   }
   savealert() {
     var alertSaveObject = {
-      "id":"",
+      "id": "",
       "name": this.alertName,
       "frequencyofEvaluation": this.freqofeval,
       "condition": this.condition,

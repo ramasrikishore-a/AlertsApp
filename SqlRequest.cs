@@ -32,6 +32,8 @@
 
         public string User { get; set; }
 
+        public string actiongroup { get; set; }
+
         //public string Created { get; set; }
 
         //public string Modified { get; set; }

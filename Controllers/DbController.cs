@@ -37,10 +37,22 @@ namespace DBCon.Ui.Controllers
         }
 
         [HttpPost("savealert")]
-        public string SaveAlert(Alert alert)
+        public JsonResult SaveAlert(Alert alert)
         {
+            try
+            {
+                QueryResponse queryResponse = new QueryResponse();
+                queryResponse.status = "success";
+                queryResponse.response = alert;
+                queryResponse.message = "Created Successfully";
+                return new JsonResult(queryResponse);
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(null);
+            }
+           
 
-            return "s";
         }
 
         [HttpPost("ExecuteCosmosQ")]
