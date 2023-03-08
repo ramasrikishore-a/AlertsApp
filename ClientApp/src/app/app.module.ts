@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { AlertsComponent } from './alerts/alerts.component';
+import { CreateAlertsComponent } from './create-alerts/create-alerts.component'
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { AgGridModule } from 'ag-grid-angular';
 
@@ -20,7 +21,8 @@ import { AgGridModule } from 'ag-grid-angular';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    AlertsComponent
+    AlertsComponent,
+    CreateAlertsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -33,6 +35,10 @@ import { AgGridModule } from 'ag-grid-angular';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: FetchDataComponent },
       { path: 'alerts', component: AlertsComponent },
+      { path: 'createalert', component: CreateAlertsComponent },
+
+     
+
     ])
   ],
   providers: [],

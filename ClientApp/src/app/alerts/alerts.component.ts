@@ -28,6 +28,7 @@ export class AlertsComponent implements OnInit {
   public actiongroup = "";
 
 
+
   constructor(heroService: HeroService, @Inject('BASE_URL') baseUrl: string) {
     this.hserice = heroService;
     this.base_url = baseUrl;
@@ -37,20 +38,9 @@ export class AlertsComponent implements OnInit {
     sortable: true,
     filter: true,
   };
+  onGridReady(event: any) {
+    //this.rowData$ = this.hserice.submitQuery(this.sqlRequest, this.base_url);
 
-
-  ngOnInit(): void {
-    this.sources = ["Sql", "Cosmos Db"];
-  }
-  sqlRequest: SQLRequest = {
-    connectionString: "data source=Kishore; database=DBConnector; User ID=newuser; Password=Admin@123",
-    querystring: "select * from employees where salary < 90000"
-  }
-  cosmosRequest: CosmosRequest = {
-    accountEndPoint: "AccountEndpoint=https://kishoredb.documents.azure.com:443/;AccountKey=ZDn6rp3P54gyZBdHrMpmkEsjv6HKfw4zCOcU2upXy5FgbcWvK0bcUAYzn1K0PpPNNJDfoCtVdOtsACDbIK0c6w==;",
-    querystring: "SELECT * FROM employees e where e.salary > 90000",
-    database: "SampleDB",
-    container: "Employee"
   }
 
   columnDefs: ColDef[] = [
@@ -59,110 +49,37 @@ export class AlertsComponent implements OnInit {
     //{ field: 'price' }
   ];
 
-  onGet() {
-    this.loading = true;
-    this.rowData$ = this.hserice.submitQuery(this.sqlRequest, this.base_url);
-    this.statusMessage = "Processing";
-
-    this.hserice.submitQuery(this.sqlRequest, this.base_url).subscribe(res => {
-      if (res) {
-        if (res.status == "success") {
-          this.data = res.response;
-          this.resultCount = res.response.length;
-          var keys = Object.keys(this.data[0]);
-          this.columnDefs = [{}];
-          for (let i = 0; i < keys.length; i++) {
-            this.columnDefs.push({ field: keys[i] })
-          }
-          this.statusMessage = "Success";
-        }
-        else {
-          this.statusMessage = res.message;
-          this.data = [];
-          this.resultCount = 0;
-        }
-      }
-      this.loading = false;
-    },
-      err => {
-        this.data = []
-        this.loading = false;
-
-      });
-  }
-
-  onGridReady(event: any) {
-    //this.rowData$ = this.hserice.submitQuery(this.sqlRequest, this.base_url);
-
-  }
-
-  onCsSubmit() {
-    this.loading = true;
-    this.data = [];
-    this.columnDefs.length = 0;
-    this.statusMessage = "Processing";
-    this.hserice.submitcsQuery(this.cosmosRequest, this.base_url).subscribe(res => {
-      if (res) {
-        if (res.status == "success") {
-          this.data = JSON.parse(res.response);
-          this.resultCount = JSON.parse(res.response).length;
-          var keys = Object.keys(this.data[0]);
-          this.columnDefs = [{}];
-          for (let i = 0; i < keys.length; i++) {
-            this.columnDefs.push({ field: keys[i] })
-          }
-          this.statusMessage = "Success";
-
-        }
-        else {
-          this.statusMessage = res.message;
-          this.data = [];
-          this.resultCount = 0;
-        }
-
-      }
-      this.loading = false;
-
-    },
-      err => {
-        this.data = [{}]
-        this.loading = false;
-
-      });
-  }
-
-  clear() {
-
-  }
-  savealert() {
-    var alertSaveObject = {
-      "id":"",
-      "name": this.alertName,
-      "frequencyofEvaluation": this.freqofeval,
-      "condition": this.condition,
-      "actiongroup": this.actiongroup,
-      "source": this.selectedSource,
-      "request": this.selectedSource == 'sql' ? JSON.stringify(this.sqlRequest) : JSON.stringify(this.cosmosRequest),
+  ngOnInit(): void {
+    this.sources = ["Sql", "Cosmos Db"];
+    this.data = [{
+      "id": "",
+      "name": "alert 1",
+      "frequencyofEvaluation": "4",
+      "condition": "productprice > 10",
+      "actiongroup": "manoj@gmail.com",
+      "source": "sql",
+     // "request": this.selectedSource == 'sql' ? JSON.stringify(this.sqlRequest) : JSON.stringify(this.cosmosRequest),
       "user": "kishore"
-    }
-    this.loading = true;
-    var response = this.hserice.SaveAlert(alertSaveObject, this.base_url).subscribe(res => {
-      if (res) {
-        if (res.status == "success") {
-          console.log(res.data);
-        }
-        else {
-          this.statusMessage = res.message;
-
-        }
-      }
-      this.loading = false;
-    },
-      err => {
-        this.data = []
-        this.loading = false;
-
-      });
+    }, {
+        "id": "",
+        "name": "alert 2",
+        "frequencyofEvaluation": "3",
+        "condition": "productprice < 10",
+        "actiongroup": "kishore@gmail.com",
+        "source": "cosmosdb",
+    //    "request": this.selectedSource == 'sql' ? JSON.stringify(this.sqlRequest) : JSON.stringify(this.cosmosRequest),
+        "user": "kishore"
+      }, {
+      "id": "",
+      "name": "alert 4",
+      "frequencyofEvaluation": "3",
+      "condition": "productprice < 10",
+      "actiongroup": "kishore@gmail.com",
+      "source": "cosmosdb",
+      //    "request": this.selectedSource == 'sql' ? JSON.stringify(this.sqlRequest) : JSON.stringify(this.cosmosRequest),
+      "user": "kishore"
+      }]
   }
+ 
 }
 

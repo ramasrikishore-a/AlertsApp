@@ -5,12 +5,13 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { CellClickedEvent, ColDef, GridReadyEvent } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 
+
 @Component({
-  selector: 'app-alerts',
-  templateUrl: './alerts.component.html',
-  styleUrls: ['./alerts.component.css']
+  selector: 'app-create-alerts',
+  templateUrl: './create-alerts.component.html',
+  styleUrls: ['./create-alerts.component.css']
 })
-export class AlertsComponent implements OnInit {
+export class CreateAlertsComponent implements OnInit {
 
   private hserice: HeroService;
   public data: any = [{}];
@@ -164,5 +165,5 @@ export class AlertsComponent implements OnInit {
 
       });
   }
-}
 
+}

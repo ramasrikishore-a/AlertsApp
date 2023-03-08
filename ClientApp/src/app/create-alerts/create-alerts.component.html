@@ -8,34 +8,34 @@
 
     <div class="form-group">
       <label for="Name">Name</label>
-      <input type="text" class="form-control" id="namebox" aria-describedby="emailHelp" placeholder="Enter name of alert" [(ngModel)]="alertName">
+      <input type="text" class="form-control" id="namebox" aria-describedby="emailHelp" placeholder="Enter name of alert" [(ngModel)]="alertName" />
       <small id="nameHelp" class="form-text text-muted">Give a unique name.</small>
 
       <div class="row">
         <div class="col">
           <label for="threshold">Threshold</label>
-          <input type="text" class="form-control" id="namebox" aria-describedby="emailHelp" placeholder="Enter name of alert" [(ngModel)]="threshold">
+          <input type="text" class="form-control" id="namebox" aria-describedby="emailHelp" placeholder="Enter name of alert" [(ngModel)]="threshold" />
 
         </div>
         <div class="col">
           <label for="threshold">Frequency of Evaluation (in mins)</label>
-          <input type="text" class="form-control" id="namebox" aria-describedby="emailHelp" placeholder="Enter name of alert" [(ngModel)]="freqofeval">
+          <input type="text" class="form-control" id="namebox" aria-describedby="emailHelp" placeholder="Enter name of alert" [(ngModel)]="freqofeval" />
         </div>
       </div>
 
     </div>
 
 
-    <!--<select class="form-control" id="pCategory" name="pCategory" [(ngModel)]="selectedSource" title="Source">
+    <select class="form-control" id="pCategory" name="pCategory" [(ngModel)]="selectedSource" title="Source">
       <option value="" selected  disabled>Choose a Source</option>
       <option *ngFor="let c of sources" [ngValue]="c">{{ c }}</option>
-    </select>-->
+    </select>
   </div>
 
   <div class="row">
     <div class="form-group">
       <label for="threshold">Action Group</label>
-      <input type="text" class="form-control" id="namebox" aria-describedby="emailHelp" placeholder="Enter name of alert" [(ngModel)]="actiongroup">
+      <input type="text" class="form-control" id="namebox" aria-describedby="emailHelp" placeholder="Enter name of alert" [(ngModel)]="actiongroup" />
       <small id="nameHelp" class="form-text text-muted">Give valid email id</small>
     </div>
 
@@ -58,7 +58,7 @@
       </ng-container>
       <div class="form-group">
         <label for="condition">Condition</label>
-        <input type="text" class="form-control" id="conditionbox" aria-describedby="emailHelp" placeholder="Enter name of alert" [(ngModel)]="condition">
+        <input type="text" class="form-control" id="conditionbox" aria-describedby="emailHelp" placeholder="Enter name of alert" [(ngModel)]="condition" />
 
       </div>
       <div class="row">
@@ -78,7 +78,7 @@
                            [rowData]="data"
                            (gridReady)="onGridReady($event)"></ag-grid-angular>
 
-          <!--<ngx-json-viewer [json]="data"></ngx-json-viewer>-->
+          <ngx-json-viewer [json]="data"></ngx-json-viewer>
         </div>
 
       </div>
@@ -89,11 +89,11 @@
 <ng-template #sqlTemplate>
   <div class="row">
     <label for="name">Connection String: </label>
-    <input id="name" class="form-control" [(ngModel)]="sqlRequest.connectionString" placeholder="connectionString">
+    <input id="name" class="form-control" [(ngModel)]="sqlRequest.connectionString" placeholder="connectionString" />
   </div>
   <div class="row">
     <label for="name">Query: </label>
-    <input id="name" class="form-control" [(ngModel)]="sqlRequest.querystring" placeholder="query">
+    <input id="name" class="form-control" [(ngModel)]="sqlRequest.querystring" placeholder="query" />
   </div>
   <div class="row">
     <button class="btn btn-primary" (click)="onGet()"> Submit </button>
@@ -104,21 +104,22 @@
   Cosmos
   <div class="row">
     <label for="name">Account Endpoint: </label>
-    <input id="name" class="form-control" [(ngModel)]="cosmosRequest.accountEndPoint" placeholder="connectionString">
+    <input id="name" class="form-control" [(ngModel)]="cosmosRequest.accountEndPoint" placeholder="connectionString" />
   </div>
   <div class="row">
     <label for="name">Database: </label>
-    <input id="name" class="form-control" [(ngModel)]="cosmosRequest.database" placeholder="query">
+    <input id="name" class="form-control" [(ngModel)]="cosmosRequest.database" placeholder="query" />
   </div>
   <div class="row">
     <label for="name">Container: </label>
-    <input id="name" class="form-control" [(ngModel)]="cosmosRequest.container" placeholder="query">
+    <input id="name" class="form-control" [(ngModel)]="cosmosRequest.container" placeholder="query" />
   </div>
   <div class="row">
     <label for="name">Query: </label>
-    <input id="name" class="form-control" [(ngModel)]="cosmosRequest.querystring" placeholder="query">
+    <input id="name" class="form-control" [(ngModel)]="cosmosRequest.querystring" placeholder="query" />
   </div>
   <div class="row">
     <button class="btn btn-primary" (click)="onCsSubmit()"> Submit </button>
   </div>
+
 </ng-template>
