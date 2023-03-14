@@ -38,6 +38,7 @@
 
         //public string Modified { get; set; }
 
+        public string threshold { get; set; }
         //public string ModifiedBy { get; set; }
         //public string CreatedBy { get; set; }
     }

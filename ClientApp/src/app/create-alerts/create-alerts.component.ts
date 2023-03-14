@@ -144,7 +144,8 @@ export class CreateAlertsComponent implements OnInit {
       "actiongroup": this.actiongroup,
       "source": this.selectedSource,
       "request": this.selectedSource == 'sql' ? JSON.stringify(this.sqlRequest) : JSON.stringify(this.cosmosRequest),
-      "user": "kishore"
+      "user": "kishore",
+      "threshold": this.threshold
     }
     this.loading = true;
     var response = this.hserice.SaveAlert(alertSaveObject, this.base_url).subscribe(res => {
