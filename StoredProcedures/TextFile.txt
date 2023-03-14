@@ -1,0 +1,60 @@
+﻿-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+alter PROCEDURE InsertAlert
+	-- Add the parameters for the stored procedure here
+	@alertname VARCHAR(50),
+@query VARCHAR(max),
+@condition VARCHAR(50),
+@actiongroup VARCHAR(50),
+@frequency VARCHAR(100),
+@created VARCHAR(100),
+@createdBy varchar(100),
+@modified varchar(100),
+@modifiedby varchar(100),
+@threshold varchar(100),
+@alertId varchar output
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	
+    -- Insert statements for procedure here
+	INSERT INTO [dbo].[Alerts]
+           ([AlertName]
+           ,[Query]
+           ,[Condition]
+           ,[Actiongroup]
+           ,[frequency]
+           ,[created]
+           ,[createdBy]
+           ,[modified]
+           ,[modifiedBy]
+           ,[threshold])
+     VALUES
+           (@alertname
+           ,@query,@condition,@actiongroup,@frequency,@created,@createdBy,@modified,@modifiedby,@threshold
+           )
+
+		   SET @alertId = SCOPE_IDENTITY()
+
+END
+GO
