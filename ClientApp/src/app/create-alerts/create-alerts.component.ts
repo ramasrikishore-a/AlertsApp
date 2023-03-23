@@ -4,6 +4,7 @@ import { SQLRequest, CosmosRequest } from '../SQLRequest';
 import { AgGridAngular } from 'ag-grid-angular';
 import { CellClickedEvent, ColDef, GridReadyEvent } from 'ag-grid-community';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class CreateAlertsComponent implements OnInit {
   public actiongroup = "";
 
 
-  constructor(heroService: HeroService, @Inject('BASE_URL') baseUrl: string) {
+  constructor(heroService: HeroService, @Inject('BASE_URL') baseUrl: string, public router: Router) {
     this.hserice = heroService;
     this.base_url = baseUrl;
   }
@@ -151,6 +152,7 @@ export class CreateAlertsComponent implements OnInit {
     var response = this.hserice.SaveAlert(alertSaveObject, this.base_url).subscribe(res => {
       if (res) {
         if (res.status == "success") {
+          this.router.navigate(['/alerts']);
           console.log(res.data);
         }
         else {

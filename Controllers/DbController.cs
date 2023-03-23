@@ -14,7 +14,7 @@ namespace DBCon.Ui.Controllers
         [HttpPost("Executesql")]
         public JsonResult ExecuteSql(SqlRequest sqlRequest)
         {
-            
+
             try
             {
                 SqlClient sqlClient = new SqlClient();
@@ -24,7 +24,7 @@ namespace DBCon.Ui.Controllers
                 return new JsonResult(data);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 QueryResponse errorResp = new QueryResponse();
                 errorResp.status = "error";
@@ -38,6 +38,8 @@ namespace DBCon.Ui.Controllers
 
         }
 
+
+
         [HttpPost("savealert")]
         public JsonResult SaveAlert(Alert alert)
         {
@@ -50,12 +52,48 @@ namespace DBCon.Ui.Controllers
                 InsertAlert(alert);
                 return new JsonResult(queryResponse);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new JsonResult(null);
             }
-           
+        }
 
+        [HttpPost("GetAlerts")]
+        public JsonResult GetAlerts(GetRequest getRequest)
+        {
+            SqlConnection connection = new SqlConnection("data source=Kishore; database=DBConnector; User ID=newuser; Password=Kishore@07;TrustServerCertificate=True");
+
+            var command = new SqlCommand("GetAlerts", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            var parameterName = new SqlParameter("@itemcount", SqlDbType.Int, 50);
+            parameterName.Value = getRequest.size;
+            command.Parameters.Add(parameterName);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            List<Alert> alerts = new List<Alert>();
+
+
+            while (reader.Read())
+            {
+                Alert alert = new Alert();
+                alert.Id = reader["AlertId"].ToString();
+                alert.Name = reader["AlertName"].ToString();
+                alert.FrequencyofEvaluation = reader["frequency"].ToString();
+                alert.Condition = reader["condition"].ToString();
+                alert.actiongroup = reader["Actiongroup"].ToString();
+                alert.Request = reader["Query"].ToString();
+                alert.Modified = reader["Modified"].ToString();
+                alert.ModifiedBy = reader["Modifiedby"].ToString();
+                alert.Created = reader["created"].ToString();
+                alert.CreatedBy = reader["createdby"].ToString();
+                alerts.Add(alert);
+            }
+
+            QueryResponse queryResponse = new QueryResponse();
+            queryResponse.response = alerts;
+            queryResponse.status = "success";
+            return new JsonResult(queryResponse);
         }
 
         public string? InsertAlert(Alert alert)
@@ -108,12 +146,12 @@ namespace DBCon.Ui.Controllers
                         cmd.Parameters.Add(parametermodified);
                         cmd.Parameters.Add(parametermodifiedby);
                         cmd.Parameters.Add(parameterAlertId);
-                        
+
                         conn.Open();
-                      
+
 
                         cmd.ExecuteNonQuery();
-                        
+
                         conn.Close();
 
                         return parameterAlertId == null ? "" : parameterAlertId.Value.ToString();
@@ -127,7 +165,7 @@ namespace DBCon.Ui.Controllers
         }
 
         [HttpPost("ExecuteCosmosQ")]
-        public  JsonResult ExecuteCosmosQ(CosmosRequest csRequest)
+        public JsonResult ExecuteCosmosQ(CosmosRequest csRequest)
         {
             try
             {
@@ -138,7 +176,7 @@ namespace DBCon.Ui.Controllers
 
                 return new JsonResult(response);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 QueryResponse errorResp = new QueryResponse();
                 errorResp.status = "error";

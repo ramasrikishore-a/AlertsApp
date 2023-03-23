@@ -11,6 +11,19 @@ export class HeroService {
 
   constructor(private http: HttpClient) { }
 
+  public GetAlerts(req: any, url: string): Observable<any> {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    let options = { headers: headers };
+    var url = url + "Database/GetAlerts";
+    return this.http.post(url, req, options).pipe(
+      catchError((err: HttpErrorResponse) => {
+        console.error('error in ' + err); return throwError(err.error.errorMessage);
+      })
+    );
+  }
+
   public SaveAlert(req: any, url: string): Observable<any> {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json'

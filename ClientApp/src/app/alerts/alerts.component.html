@@ -1,12 +1,18 @@
 <div class="container">
-  Alerts
+  <div class="row">
+    <label for="name">Alerts</label>
+    <button (click)="createNewClicked()">Create New</button>
+
+
   <div class="row">
     <div class="json-box">
       <div *ngIf="loading">
         Fetching data...
       </div>
-   
-      
+      Message : {{statusMessage}}
+      resultCount : {{resultCount}}
+
+
 
       <ag-grid-angular style="width: 100%; height: 100%"
                        class="ag-theme-alpine"

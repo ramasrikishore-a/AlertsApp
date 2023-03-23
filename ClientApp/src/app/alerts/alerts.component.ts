@@ -3,7 +3,10 @@ import { HeroService } from '../hero.service';
 import { SQLRequest, CosmosRequest } from '../SQLRequest';
 import { AgGridAngular } from 'ag-grid-angular';
 import { CellClickedEvent, ColDef, GridReadyEvent } from 'ag-grid-community';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alerts',
@@ -12,7 +15,7 @@ import { Observable } from 'rxjs';
 })
 export class AlertsComponent implements OnInit {
 
-  private hserice: HeroService;
+  private heroservice: HeroService;
   public data: any = [{}];
   public sources: any;
   public selectedSource: any = "";
@@ -21,65 +24,67 @@ export class AlertsComponent implements OnInit {
   public rowData$!: Observable<any[]>;
   public loading: any = false;
   public statusMessage: any = "";
-  public alertName = "";
-  public threshold = "";
-  public freqofeval = "";
-  public condition = "";
-  public actiongroup = "";
 
-
-
-  constructor(heroService: HeroService, @Inject('BASE_URL') baseUrl: string) {
-    this.hserice = heroService;
+  constructor(heroService: HeroService, @Inject('BASE_URL') baseUrl: string, private router: Router) {
+    this.heroservice = heroService;
     this.base_url = baseUrl;
   }
 
   public defaultColDef: ColDef = {
     sortable: true,
-    filter: true,
+    filter: false,
   };
+
   onGridReady(event: any) {
     //this.rowData$ = this.hserice.submitQuery(this.sqlRequest, this.base_url);
-
+   
   }
 
   columnDefs: ColDef[] = [
-    //{ field: 'make' },
-    //{ field: 'model' },
-    //{ field: 'price' }
+    { field: "alertname" },
+    { field: "id" },
+    { field: "source" }
   ];
 
-  ngOnInit(): void {
-    this.sources = ["Sql", "Cosmos Db"];
-    this.data = [{
-      "id": "",
-      "name": "alert 1",
-      "frequencyofEvaluation": "4",
-      "condition": "productprice > 10",
-      "actiongroup": "manoj@gmail.com",
-      "source": "sql",
-     // "request": this.selectedSource == 'sql' ? JSON.stringify(this.sqlRequest) : JSON.stringify(this.cosmosRequest),
-      "user": "kishore"
-    }, {
-        "id": "",
-        "name": "alert 2",
-        "frequencyofEvaluation": "3",
-        "condition": "productprice < 10",
-        "actiongroup": "kishore@gmail.com",
-        "source": "cosmosdb",
-    //    "request": this.selectedSource == 'sql' ? JSON.stringify(this.sqlRequest) : JSON.stringify(this.cosmosRequest),
-        "user": "kishore"
-      }, {
-      "id": "",
-      "name": "alert 4",
-      "frequencyofEvaluation": "3",
-      "condition": "productprice < 10",
-      "actiongroup": "kishore@gmail.com",
-      "source": "cosmosdb",
-      //    "request": this.selectedSource == 'sql' ? JSON.stringify(this.sqlRequest) : JSON.stringify(this.cosmosRequest),
-      "user": "kishore"
-      }]
+  ngOnInit(): void {  
+   this.onGet();
   }
- 
+
+  createNewClicked() {
+    this.router.navigate(['/createalert']);
+  }
+
+  onGet() {
+    this.loading = true;
+   // this.rowData$ = this.heroservice.GetAlerts({ "size": "10" }, this.base_url);
+    this.statusMessage = "Processing";
+
+    this.heroservice.GetAlerts({ "size": "10" }, this.base_url).subscribe(res => {
+      if (res) {
+        if (res.status == "success") {
+          this.data = res.response;
+          this.resultCount = res.response.length;
+          var keys = Object.keys(this.data[0]);
+          this.columnDefs = [];
+          for (let i = 0; i < keys.length; i++) {
+            this.columnDefs.push({ field: keys[i] })
+          }
+          this.statusMessage = "Success";
+        }
+        else {
+          this.statusMessage = res.message;
+          this.data = [];
+          this.resultCount = 0;
+        }
+      }
+      this.loading = false;
+    },
+      err => {
+        this.data = []
+        this.loading = false;
+
+      });
+  }
+
 }
 

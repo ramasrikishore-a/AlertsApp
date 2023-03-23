@@ -18,6 +18,11 @@
         public string container { get; set; }
     }
 
+    public class GetRequest
+    {
+        public int size { get; set; }
+    }
+
     public class Alert
     {
         public string Id { get; set; }
@@ -34,12 +39,12 @@
 
         public string actiongroup { get; set; }
 
-        //public string Created { get; set; }
+        public string? Created { get; set; }
 
-        //public string Modified { get; set; }
+        public string? Modified { get; set; }
 
         public string threshold { get; set; }
-        //public string ModifiedBy { get; set; }
-        //public string CreatedBy { get; set; }
+        public string? ModifiedBy { get; set; }
+        public string? CreatedBy { get; set; }
     }
 }
