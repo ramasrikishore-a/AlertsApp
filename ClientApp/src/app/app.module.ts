@@ -10,6 +10,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { CreateAlertsComponent } from './create-alerts/create-alerts.component'
+import { FlyoutComponent } from './Flyout/flyout.component';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { AgGridModule } from 'ag-grid-angular';
 
@@ -22,7 +23,8 @@ import { AgGridModule } from 'ag-grid-angular';
     CounterComponent,
     FetchDataComponent,
     AlertsComponent,
-    CreateAlertsComponent
+    CreateAlertsComponent,
+    FlyoutComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,12 +34,10 @@ import { AgGridModule } from 'ag-grid-angular';
     AgGridModule,
     
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: AlertsComponent, pathMatch: 'full' },
       { path: 'counter', component: FetchDataComponent },
       { path: 'alerts', component: AlertsComponent },
-      { path: 'createalert', component: CreateAlertsComponent },
-
-     
+      { path: 'createalert', component: CreateAlertsComponent }    
 
     ])
   ],

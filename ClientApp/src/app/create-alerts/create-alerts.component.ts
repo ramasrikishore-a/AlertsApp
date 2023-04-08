@@ -29,7 +29,8 @@ export class CreateAlertsComponent implements OnInit {
   public condition = "";
   public actiongroup = "";
 
-
+  public isOpen = false;
+  
   constructor(heroService: HeroService, @Inject('BASE_URL') baseUrl: string, public router: Router) {
     this.hserice = heroService;
     this.base_url = baseUrl;
@@ -131,6 +132,10 @@ export class CreateAlertsComponent implements OnInit {
         this.loading = false;
 
       });
+  }
+
+  toggleFlyout() {
+    this.isOpen = !this.isOpen;
   }
 
   clear() {

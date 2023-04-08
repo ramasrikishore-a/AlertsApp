@@ -14,3 +14,30 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #0077cc;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+  button:hover {
+    background-color: #005ea6;
+  }
+  .flyout {
+    position: absolute;
+    top: 0;
+    left: -250px; /* initial position */
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .flyout.open {
+    left: 0;
+  }
