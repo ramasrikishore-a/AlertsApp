@@ -8,11 +8,12 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { DataService } from '../DataService';
 
 @Component({
-  selector: 'app-create-alerts',
-  templateUrl: './create-alerts.component.html',
-  styleUrls: ['./create-alerts.component.css']
+  selector: 'app-update-alerts',
+  templateUrl: './update-alerts.component.html',
+  styleUrls: ['./update-alerts.component.css']
 })
 export class CreateAlertsComponent implements OnInit {
 
@@ -33,7 +34,7 @@ export class CreateAlertsComponent implements OnInit {
 
   public isOpen = false;
 
-  constructor(heroService: HeroService, @Inject('BASE_URL') baseUrl: string, public router: Router) {
+  constructor(heroService: HeroService, @Inject('BASE_URL') baseUrl: string, public router: Router,private dataService: DataService) {
     this.hserice = heroService;
     this.base_url = baseUrl;
   }

@@ -4,8 +4,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
+var config = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
+
+builder.Configuration.AddConfiguration(config);  
+
 var app = builder.Build();
 
+
+
+
+
+string connectionString = config["DbSettings:ConnectionString"];
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <h2>View Alert<span class="badge badge-secondary">{{currentAlert.Name}}</span></h2>
+    </div>
+    <div class="col-md-3">
+      <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-primary" (click)="savealert()">Save</button>
+      </div>
+    </div>
+  </div>  
+  <div class="row">
+    <div class="">
+      <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" class="form-control" id="namebox" aria-describedby="Name"
+          placeholder="Enter name of alert" [(ngModel)]="currentAlert.Name" />
+        <label for="threshold">Threshold</label>
+        <input type="text" class="form-control" id="namebox" aria-describedby="Threshold"
+          placeholder="Enter name of alert" [(ngModel)]="currentAlert.Threshold" />
+        <label for="threshold">Frequency of Evaluation (in mins)</label>
+        <input type="text" class="form-control" id="namebox" aria-describedby="Frequency"
+          placeholder="Enter name of alert" [(ngModel)]="currentAlert.Frequency" />
+        <label for="threshold">Action Group</label>
+        <input type="text" class="form-control" id="namebox" aria-describedby="Action Group"
+          placeholder="Enter name of alert" [(ngModel)]="currentAlert.ActionGroup" />
+        <label for="condition">Condition</label>
+        <input type="text" class="form-control" id="conditionbox" aria-describedby="Condition"
+          placeholder="Enter name of alert" [(ngModel)]="currentAlert.Condition" />
+      </div>
+      <app-query [source]="currentAlert.SelectSource"  request="currentAlert.Request" (updateRequest)="onUpdateRequest($event)"></app-query>
+    </div>
+  </div>
+</div>

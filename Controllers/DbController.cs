@@ -10,32 +10,30 @@ namespace DBCon.Ui.Controllers
     [Route("[controller]")]
     public class DatabaseController : ControllerBase
     {
+        public IConfiguration Configuration;
+
+        public DatabaseController(IConfiguration config)
+        {
+            Configuration = config;
+
+        }
 
         [HttpPost("Executesql")]
         public JsonResult ExecuteSql(SqlRequest sqlRequest)
         {
-
             try
             {
                 SqlClient sqlClient = new SqlClient();
-
                 QueryResponse data = sqlClient.GetData(sqlRequest);
-
                 return new JsonResult(data);
-
             }
             catch (Exception ex)
             {
                 QueryResponse errorResp = new QueryResponse();
                 errorResp.status = "error";
-                errorResp.message = ex.Message;
-                //dbconexception dbconexception = new dbconexception();
-                //dbconexception.ErrorMessage = ex.Message;
-                //dbconexception.StackTrace = ex.StackTrace;
+                errorResp.message = ex.Message;              
                 return new JsonResult(errorResp);
-
             }
-
         }
 
 
@@ -61,7 +59,10 @@ namespace DBCon.Ui.Controllers
         [HttpPost("GetAlerts")]
         public JsonResult GetAlerts(GetRequest getRequest)
         {
-            SqlConnection connection = new SqlConnection("data source=Kishore; database=DBConnector; User ID=newuser; Password=Kishore@07;TrustServerCertificate=True");
+            string connectionString = Configuration["DbSettings:ConnectionString"];
+
+            SqlConnection connection = new SqlConnection(connectionString);
+                //"data source=Kishore; database=DBConnector; User ID=newuser; Password=Kishore@07;TrustServerCertificate=True");
 
             var command = new SqlCommand("GetAlerts", connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
@@ -100,7 +101,10 @@ namespace DBCon.Ui.Controllers
         {
             try
             {
-                using (var conn = new SqlConnection("data source=Kishore; database=DBConnector; User ID=newuser; Password=Kishore@07;TrustServerCertificate=True"))
+                string connectionString = Configuration["DbSettings:ConnectionString"];
+
+                // SqlConnection connection = new SqlConnection(connectionString);
+                using (var conn = new SqlConnection(connectionString))// data source = Kishore; database=DBConnector; User ID=newuser; Password=Kishore@07;TrustServerCertificate=True"))
                 {
                     using (var cmd = new SqlCommand("dbo.InsertAlert", conn))
                     {
@@ -171,24 +175,16 @@ namespace DBCon.Ui.Controllers
             {
                 CosmosClientDB cosmosClientDB = new CosmosClientDB(csRequest);
                 QueryResponse response = cosmosClientDB.ExecuteQuery(csRequest.querystring).Result;
-
                 response.status = "success";
-
                 return new JsonResult(response);
             }
             catch (Exception ex)
             {
                 QueryResponse errorResp = new QueryResponse();
                 errorResp.status = "error";
-                errorResp.message = ex.Message;
-                //dbconexception dbconexception = new dbconexception();
-                //dbconexception.ErrorMessage = ex.Message;
-                //dbconexception.StackTrace = ex.StackTrace;
+                errorResp.message = ex.Message;              
                 return new JsonResult(errorResp);
-
             }
-
-            // return 10;
         }
     }
 }

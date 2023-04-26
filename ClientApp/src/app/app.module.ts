@@ -13,7 +13,9 @@ import { CreateAlertsComponent } from './create-alerts/create-alerts.component'
 import { FlyoutComponent } from './Flyout/flyout.component';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { AgGridModule } from 'ag-grid-angular';
-
+import { ViewAlertComponent } from './Viewalerts/view-alert.component';
+import { QueryComponent } from './Query-Selector/query.component';
+import { DataService } from './DataService';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { AgGridModule } from 'ag-grid-angular';
     FetchDataComponent,
     AlertsComponent,
     CreateAlertsComponent,
-    FlyoutComponent
+    FlyoutComponent,
+    ViewAlertComponent,
+    QueryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -37,11 +41,12 @@ import { AgGridModule } from 'ag-grid-angular';
       { path: '', component: AlertsComponent, pathMatch: 'full' },
       { path: 'counter', component: FetchDataComponent },
       { path: 'alerts', component: AlertsComponent },
-      { path: 'createalert', component: CreateAlertsComponent }    
+      { path: 'createalert', component: CreateAlertsComponent }    ,
+      { path:'viewalert',component:ViewAlertComponent}
 
     ])
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

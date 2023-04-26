@@ -37,6 +37,20 @@ export class HeroService {
     );
   }
 
+  public PostQuery(sqlreq: any,url:string): Observable<any> {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    let options = { headers: headers };
+    var url = url;
+    return this.http.post(url, sqlreq, options).pipe(
+      catchError((err: HttpErrorResponse) => {
+        console.error('error in ' + err); return throwError(err.error.errorMessage);
+      })
+    );
+
+  }
+
   public submitQuery(sqlreq: SQLRequest,url:string): Observable<any> {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json'
